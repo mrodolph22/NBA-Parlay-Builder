@@ -1,0 +1,5 @@
+{
+  "name": "NBA Parlay Builder",
+  "description": "A lightweight, performance-focused NBA parlay builder that helps you compare player props and lines across top sportsbooks in real time. Clean, fast, and easy to use—built to help you spot value and build smarter parlays.",
+  "requestFramePermissions": []
+}
