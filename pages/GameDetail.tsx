@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Game, OddsResponse, Bookmaker, Market, Outcome, PrimaryPlayerProp, PlayerOffer, EventMarket } from '../types';
 import { fetchAvailableMarkets, fetchOddsForMarket } from '../api/oddsApi';
@@ -164,7 +163,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
         {error && <div className="label-tiny" style={{ color: '#dc2626', marginBottom: '20px', textAlign: 'center' }}>{error}</div>}
 
         {!loading && marketCache[selectedMarket] && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Action Bar */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -176,13 +175,24 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
               <button 
                 onClick={handleAnalyze} 
                 disabled={analyzing} 
-                style={{ backgroundColor: '#000', color: '#fff', padding: '10px 20px', borderRadius: '30px' }}
+                className={analyzing ? "" : "btn-primary-gradient"}
+                style={{ padding: '10px 24px', borderRadius: '30px' }}
               >
-                {analyzing ? 'Building Parlay' : 'Build Parlay'}
+                {analyzing ? 'Building...' : 'Build Parlay'}
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {/* AI Progress Bar */}
+            {analyzing && (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '8px 0' }}>
+                <div className="body" style={{ marginBottom: '8px', color: 'var(--btn-blue-end)' }}>Loading...</div>
+                <div className="progress-track">
+                  <div className="progress-fill"></div>
+                </div>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: analyzing ? '0px' : '16px' }}>
               {primaryProps.length === 0 ? (
                 <div className="no-line" style={{ textAlign: 'center', padding: '40px' }}>No player props found for this market.</div>
               ) : (
@@ -215,13 +225,13 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
                             </div>
                           ) : (
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
-                              {/* Prop block: Stacked and centered internally */}
+                              {/* Prop block */}
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                                 <span className="prop-line">{prop.line}</span>
                                 <span className="prop-label">{renderMarketLabel(prop.marketKey)}</span>
                               </div>
                               
-                              {/* Odds block: Vertically centered relative to the container */}
+                              {/* Odds block */}
                               <div className="odds-container" style={{ alignSelf: 'center' }}>
                                 {offer ? (
                                   <>

@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { useApiKey } from '../context/ApiKeyContext';
 
@@ -15,10 +14,14 @@ const ApiKeySetup: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', padding: '16px' }}>
-      <div className="card" style={{ width: '100%', maxWidth: '380px', padding: '40px', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '24px', fontWeight: '900', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '-1px' }}>NBA Parlay Builder</h1>
-        <p style={{ fontSize: '13px', marginBottom: '32px', color: '#6b7280' }}>Enter your API key to access site.</p>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div className="card" style={{ width: '100%', maxWidth: '440px', padding: '60px 40px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '-1.5px', color: '#111' }}>
+          NBA PARLAY BUILDER
+        </h1>
+        <p style={{ fontSize: '15px', marginBottom: '48px', color: '#6b7280', fontWeight: '500' }}>
+          Enter your API key to access site.
+        </p>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <input
             type="password"
             placeholder="The-Odds-API Key"
@@ -28,10 +31,10 @@ const ApiKeySetup: React.FC = () => {
           <button
             type="submit"
             className="btn-primary-gradient"
-            style={{ padding: '12px', fontSize: '13px', borderRadius: '12px' }}
+            style={{ padding: '16px', fontSize: '14px', borderRadius: '14px' }}
             disabled={!inputValue.trim()}
           >
-            Access Site
+            ACCESS SITE
           </button>
         </form>
       </div>
