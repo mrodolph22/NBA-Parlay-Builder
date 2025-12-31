@@ -16,6 +16,7 @@ export interface Outcome {
   description?: string; // Player name often lives here
   price: number;
   point?: number;
+  team?: string; // Added to support team grouping
 }
 
 export interface Market {
@@ -51,11 +52,16 @@ export interface PrimaryPlayerProp {
   playerName: string;
   marketKey: string;
   line: number;
+  team?: string; // Added to support team grouping
   offers: PlayerOffer[];
+  consensusStrength: 'Low' | 'Medium' | 'High';
+  parlayRole: 'Anchor' | 'Support' | 'Volatile';
+  marketLean?: 'MORE' | 'LESS'; // If undefined, state is neutral/unavailable
+  isNotable?: boolean; // Flag for structural relevance highlight
 }
 
 export enum ViewState {
-  API_SETUP = 'api_setup',
+  API_setup = 'api_setup',
   GAMES_LIST = 'games_list',
   GAME_DETAIL = 'game_detail'
 }
