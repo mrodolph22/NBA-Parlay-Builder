@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NBA Parlay Builder</title>
+  <title>Jumpshot AI</title>
   <style>
     :root {
       --bg-color: #f3f4f6;
@@ -129,7 +129,6 @@
       background: var(--card-bg);
       border-radius: 10px;
       box-shadow: var(--shadow);
-      overflow: hidden;
       margin-bottom: 8px;
       position: relative;
       display: flex;
@@ -169,7 +168,7 @@
       border-bottom: 1px solid var(--border-color);
       padding: 4px 8px;
       letter-spacing: 0.4px;
-      background-color: #fff;
+      /* background-color: #fff; */
       color: var(--secondary-text);
       white-space: nowrap;
       position: relative;
@@ -178,7 +177,7 @@
     .star-indicator {
       color: var(--muted-gold);
       font-size: 9px;
-      cursor: help;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -188,7 +187,7 @@
 
     /* CSS Tooltip */
     .star-indicator::before {
-      content: "Star indicates role stability and market consistency.";
+      content: "Star indicates structural role stability within current market pricing.";
       position: absolute;
       bottom: 160%;
       right: 0;
@@ -274,6 +273,12 @@
       position: absolute;
       bottom: 6px;
       right: 6px;
+    }
+
+    .line-type-row {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
     }
 
     .risk-tag {
