@@ -6,6 +6,7 @@ import { useApiKey } from '../context/ApiKeyContext';
 import { generateInsightsWithGemini, PlayerInsight } from '../services/geminiService';
 import { calculateEMR } from '../utils/emrCalculator';
 import { evaluateParlayRole } from '../utils/parlayFit';
+import { determineLineType } from '../utils/lineTypeCalculator';
 
 interface GameDetailProps {
   game: Game;
@@ -149,6 +150,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
       }
 
       const parlayRole = evaluateParlayRole(primaryLine, marketKey, consensusStrength, avgOverPrice);
+      const lineType = determineLineType(primaryLine, marketKey, consensusStrength);
 
       results.push({ 
         playerName, 
@@ -158,7 +160,8 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
         offers: offersAtPrimary,
         consensusStrength,
         parlayRole,
-        marketLean
+        marketLean,
+        lineType
       });
     });
 
@@ -262,7 +265,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
           <span>{prop.playerName}</span>
           <div style={{ float: 'right', display: 'flex', alignItems: 'center' }}>
             {prop.isNotable && showAdvancedData && (
-              <span className="star-indicator" aria-label="Role stability and market consistency indicator">★</span>
+              <span className="star-indicator" aria-label="Star indicates structural role stability within current market pricing.">★</span>
             )}
             <span style={{ opacity: 0.5, fontSize: '8.5px', fontWeight: 600 }}>{prop.team}</span>
           </div>
@@ -342,6 +345,14 @@ const GameDetail: React.FC<GameDetailProps> = ({ game, onBack }) => {
               >
                 Role: {prop.parlayRole}
               </div>
+            </div>
+          )}
+
+          {showAdvancedData && prop.lineType && (
+            <div className="line-type-row">
+               <span className="risk-tag risk-moderate" style={{ fontStyle: 'normal', opacity: 0.9 }}>
+                {prop.lineType}
+               </span>
             </div>
           )}
 
